@@ -1,0 +1,170 @@
+what is aws
+===========
+Amazon Web Services is a subsidiary of Amazon that provides on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered pay-as-you-go basis.
+
+why we use aws
+==============
+
+Amazon Web Services (AWS) is a secure cloud services platform, offering compute power, database storage, content delivery and other functionality to help businesses scale and grow. Running web and application servers in the cloud to host dynamic websites.
+
+advantages of aws
+=================
+
+Amazon Web Service provide you with the security you need at a lower cost than in an on-premises environment. AWS provides security and also helps to protect the privacy as it is stored in AWS data centres. AWS infrastructure is designed to keep your data safe no matter what size of your data is.
+
+    Zero CapEx: Many people tend to believe that AWS or any other cloud-based solution are only for the riches. ...
+    No-Commitment: ...
+    Get Rid of Negotiations: ...
+    Procurement: ...
+    Pay Per Use: ...
+    Security: ...
+    Flexibility: ...
+    Global Leader:
+
+Disadvantages of using AWS.
+==========================
+
+    AWS service limits an they are set by the platform.
+    Technology limitations.
+    Bigger learning curve.
+    High Technical support fee.
+    General security concerns.
+
+
+Cloud on-Demand
+===============
+Featured snippet from the web
+On-demand computing is a delivery model in which computing resources are made available to the user as needed. The resources may be maintained within the user's enterprise, or made available by a cloud service provider.
+
+Application programming interface
+=================================
+
+API is the acronym for Application Programming Interface, which is a software intermediary that allows two applications to talk to each other. Each time you use an app like Facebook, send an instant message, or check the weather on your phone, you're using an API.
+
+
+IAM  - identity access management 
+===============================
+
+1.what is iam
+
+Aws identity and access management is secure web service it's securely control access to aws resources for users. we an access aws resources using authentication
+
+2.why we need iam
+
+To craete user, manages user and control aws resources using policies and roles
+
+3.components of iam
+
+user, group, roles, policies
+
+4.multifactor authendication
+
+using google authenticator we get one time password for account login
+
+5. hands-on
+
+
+users
+======
+
+using IAM we can create and manage aws user, use permission to allow and deny access aws resources
+
+groups:
+======
+whenever you create user combined by group uers and policies applied to that group
+
+roles
+=====
+
+roles set of policies role assign to application
+
+policies:
+========
+policies nothing but permission whatever role user and group created, we can apply that policies to user group role.
+
+
+
+aws fundamentals:
+=================
+
+IAM
+1. USER
+2. GROUP
+3. ROLE
+4. Policies
+
+important
+=========
+EC2 ==> Amazon Elastic Compute Cloud
+
+Amazon Elastic Compute Cloud forms a central part of Amazon.com's cloud-computing platform, Amazon Web Services, by allowing users to rent virtual computers on which to run their own computer applications
+
+An EC2 instance is a virtual server in Amazon's Elastic Compute Cloud (EC2) for running applications on the Amazon Web Services (AWS) infrastructure. AWS is a comprehensive, evolving cloud computing platform; EC2 is a service that allows business subscribers to run application programs in the computing environment
+
+
+Aws regions
+===========
+1.aws has regions all round the world ex:(us-east-1)
+2.Each region has avilability zones ex:(us-east-1a,us-east-1b and so on) up to six availability zones
+3.each availabilty zones have physical datacentres every one seperated each other
+4. Each avilability zones have minimum 3 datacentres thats basic how aws works 
+5. IAM and s3 not require regions
+
+--------------------------------------------------------------------------------------------------------
+
+IAM Apr 30 2020
+===============  
+
+Identity and access management
+
+1. your whole aws security is there
+  . user
+  . group
+  . roles
+2. root account should never be shared
+3. user must be created with proper permissions
+4. iam is center of aws
+5. policies written in json (javascript object notation) 
+
+    
+users
+=====
+. user is pysical person like you or me
+
+groups
+======
+. users can be grouped together like admin devops and devlopers overall group conatin user
+. we can apply permission to group and access aws resources
+
+roles
+=====
+. roles are internal usages with aws resources and services
+
+policies
+=======
+. policies are json document
+. policies define above all threes what can do and can't do
+
+global view
+==========
+iam is global role when we create user group role it will avilable all regions
+
+MFA
+===
+. multifactor authendication can be done with aws
+
+. aws comes with predefined managed policies
+
+
+
+
+
+
+
+
+
+
+
+
+
+

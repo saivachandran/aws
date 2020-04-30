@@ -1,0 +1,298 @@
+AWS- Amazon webservices
+
+IAM identity and access management
+=================================
+
+create user in IAM
+
+1. login aws root account
+2. click services
+3. under Security, Identity, & Compliance click IAM
+
+click users
+===========
+       ||
+      add user
+       ||
+      username ==> test  
+       ||
+      select aws access type 
+        1. programatic access
+        2. aws management console access
+       ||
+      console password
+       1.auto generated password
+       2. custom password
+       ||
+      require password reset
+        1. must reset password next login [disable] 
+       ||
+       click nextpermission
+       ||
+       set permission for test
+         1. add user to group
+         2. copy permission from existing user
+         3. attch existing policies directly
+       ||
+      select 3rd option
+       ||
+      select Administrator access to user
+       ||
+      click next option
+       ||
+      click create user
+        1. it shows username, access key , secret key and email copy both keys because secret key first time only shows
+
+       ||
+      login difrrent url its shows login url
+       ||
+      logut from root aws account and login from admin account
+      
+      IAM users sign-in link:
+      
+
+      username:
+      password:
+  
+
+groups:
+======
+        click groups
+           ||
+        create New group
+           ||
+        GroupName [devops]
+           ||
+        click next step
+           ||
+        Attache policy
+           ||
+        select any policy ex: amazon s3 full access
+           ||
+        click CreateGroup     
+
+create another user and add that user to devops group
+
+       create user
+         ||
+       add user to group
+
+we s3 full access to group 
+
+     login group user with url login
+        ||
+     account
+     username
+     password
+        ||
+   if you click ec2 instance it will through error you don't have permission to do this 
+        ||
+   click s3 services you can access s3 bucket (rwx)
+        ||
+   click group==> click permission
+        ||
+   detach policy
+        ||
+   click s3 we can't perporm any action because we don't have permission 
+
+
+roles:
+=====
+
+   click iam dashboard
+       ||
+   click Create new role
+       ||
+   select role type ==> select amazon ec2
+       ||
+   Attach policy select amazon s3 access
+       ||
+   set role name nad review
+     1. role name
+     2. role description
+       ||
+   click create role
+
+
+attache this role to ec2 instance
+
+   select ec2 instance
+       ||
+    click actions
+       ||
+    instance settings
+       ||
+    attache replace/iam role
+       ||
+    select iam role to attach
+       ||
+     apply
+
+now role has been attached with ec2 instance
+
+policies:
+========
+
+=================================================================================================================================================================================
+IAM Apr 30 2020 hands-on
+=======================
+
+1. in aws search bar search iam
+
+     click IAM ==> its global service
+        ||
+     welcome to identity and access management dashboard
+        ||
+     click activate MFA on your account
+        ||
+     click Manage MFA
+        ||
+     multifactor authendication ==> Activate MFA
+        ||
+     select virtual MFA device
+        ||
+     click next step
+       ||
+     its's open barcode scanner page
+       ||
+     downlaod google authedicator in your mobile
+       ||
+     scan QR code from mobile
+       ||
+     enter two authendication codes
+       ||
+     now wa can see mfa green tick on iam dashboard
+
+2. click individual IAM USER
+       ||
+    click Manage user
+       ||
+    click Add user
+       ||
+    User name [saiva]
+       ||
+    Select aws access type
+       * Access type
+          . tick programatic access ==>  enable access keyid and secret keyid for aws api cli sdk
+          . tick aws management console access ==> enable password user login access aws console access
+       ||
+    console password
+       . tick Auto genearted password 
+       . custom password 
+       ||
+    tick Require password reset ==> user must reset password at next login
+       ||
+    click next
+       ||
+    set permissions
+      . Add user to group
+      . copy permission from existing user
+      . Attach existing policies directly
+       ||
+    select Attach existing policies directly
+       ||
+    select Administratoraccess  
+       ||
+    click next and review
+       ||
+    click create user 
+      ||
+    its display access key secret key download .csv file to your local machine
+
+3. use groups to assign permissions
+     ||
+  Manage groups
+     ||
+  create New Group
+     ||
+  Group name [admin]
+     ||
+  next step
+     ||
+  Attach policy
+     ||
+  select Administrator access
+     ||
+  Create group
+     ||
+  click group
+     ||
+  click user 
+     ||
+  add user to group
+     ||
+  
+4. go to user
+    ||
+   click user
+    ||
+   detach Administartor access
+
+5. Apply IAM passsword policy
+     ||
+   manage password policy
+     ||
+   select allow user change own password
+   tick passoword expiry days
+
+6. create account alaias click customize
+
+and set name for alaias like saiva-aws
+
+7. netx login using iam link
+
+    user name
+    password
+    old password
+    newpassword
+    confirm new password
+
+
+ 
+
+
+  
+ 
+       
+ 
+
+         
+  
+       
+
+
+  
+
+
+
+
+          
+
+
+
+
+
+ 	
+    
+   
+ 
+     
+  
+
+
+  
+    
+       
+
+
+
+       
+  
+
+
+       
+
+
+
+
+
