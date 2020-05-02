@@ -248,6 +248,380 @@ and set name for alaias like saiva-aws
     confirm new password
 
 
+
+
+Ec2 hands-on
+============
+
+1.first select prefered region when you create Ec2 instance
+
+   click EC2
+     ||
+   click launch instance
+     ||
+   choose ami amazon machine image
+     ||
+   select amazon linux 2
+     ||
+   choose instance type
+     . type t2 micro free tier elegible
+     . select vcpus
+     . select memory
+     ||
+   click next configuration instance details
+     ||
+   configure instance details
+     . number of instances: 1 (select based on requirement)
+     . purchage option: [] request spot instance [untick because we need on demand instance]
+     . network: select default vpc
+     . subnet:  select availability zone or No preference default subnet 
+     . Auto-assign public ip: use subnet setting enable
+     .  IAM role: None
+     . shutdown behaviour: stop
+     . Enable termination production: [] protect against accidental termination [tick if you want]
+     . Monitoring: enable cloud watch [*additional charges*]
+     . Tenancy: shared- run a shared hardware instance [*dedicated additional charges apply*]
+     . T2unlimited [] enable [*Addtional charges apply don't enable]
+     . advance Deatils: user data
+                        . [] as text [] as file []
+
+      ||
+    click next add storage
+      ||
+     Add storage
+       volume type  device Snapshot size(Gib) volume type iops       throuhput(mB/s0   delete on termination     encrypted
+         root        /dev/xvda        8           ssd      100/3000    N/A                   tick                not encrypted
+      ||
+     Add tags
+     key       value
+     Name       my instance
+      ||
+    click next configure security group
+      ||
+    
+  Assign a security group:
+    . Create a new security group 
+    . Select an existing security group
+     ||
+   Security group name: saiva
+     ||
+   Description: saiva_web
+     ||
+   type   protocol   port range source                             description
+    ssh     tcp         22        0.0.0.0/0 or 192.168.43.49/24     ssh for saiva machine
+     ||
+   click review and launch
+     ||
+   click launch
+     ||
+  select new key pair
+     ||
+  key pair name
+     ||
+  download key pair save it
+     ||
+  select Ec2 instance
+     ||
+   click action ==> instance state
+     ||
+     . stop
+     . reboot
+     . terminate
+  
+
+
+How to ssh into your ec2 instance
+================================
+
+1.from linux or mac
+
+step1. ssh is most important fuction it allows you control remote machine all using command line.
+
+click instance its shows public ip nad public dns
+
+Access aws instance using private key file
+
+# ssh -i saiva.pem ec2-user@52.66.237.18 
+
+we got below error because file too open file permission 0644
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0644 for 'saiva.pem' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "saiva.pem": bad permissions
+ec2-user@52.66.237.18: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+
+
+
+
+ll saiva.pem 
+-rw-r--r-- 1 rits-3 rits-3 1696 Apr 30 17:10 saiva.pem
+
+
+change private key file permission to 400
+
+$chmod 400 saiva.pem
+
+$ ssh -i saiva.pem ec2-user@52.66.237.18
+Last login: Fri May  1 02:27:59 2020 from 27.62.113.25
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+
+
+allow sing ip only in aws security group
+
+check public ip in aws
+
+edit security group
+||
+edit source ip 
+||
+27.62.113.25/32
+
+now we can access via oly particular network only
+
+
+security gorups:
+===============
+
+security group funtamentals of network security in aws	
+
+They control how traffic allowd into or out od our Ec2 machines
+
+   click security group
+     ||
+   click actions
+     ||
+   edit inbound rules   (in outbound by default all traffic allowed)
+     ||
+   remove security group role
+     ||
+   access aws instance not connected thrugh timedout error
+     ||
+   add ssh in bound rule
+     ||
+   inbound rule
+     type    protocol     port range     source                             Description
+
+     ssh        Tcp          22            my ip 45.56.23.86/24               ssh for my machine
+
+    ||
+   access ec2 instance now it's connected
+
+
+private ip vs public ip vs elastic ip
+====================================
+
+
+   click ec2 instance
+      ||
+   copy public ip and access ec2 instance
+      ||
+   we can't access private ip because we are not in same network
+      ||
+   right click ==> instance state
+      || 
+  stop instance public ip got changed but private ip not change
+      ||
+  start instance again public ip got changed again
+
+
+
+
+Elasticip
+=========
+
+for fixed elastic ip we go to elastic ip
+
+  Click elastic ip
+     ||
+  allocate new address
+     ||
+  new ip allocated
+     ||
+  Associate elastic ip
+     ||
+   Resurce type
+     . instance
+     . Network interface
+     ||
+   select instance
+     ||
+   click associate
+     ||
+   now elastic ip associated with instance
+     ||
+   now stop and start instance 
+     ||
+   public ip is same as previous
+     ||	
+   right click ec2 instance
+     ||
+    Network
+     ||
+    disassociate elastic ip address
+     ||
+    click elastic ip
+     ||
+    click actions ==> release elastic ip
+     ||
+    now new ip assigned to ec2 instance
+      
+  
+    
+
+install apache webserver on Ec2 instance
+========================================
+
+$ ssh-i saiva.pem ec2-user@ip
+
+$ sudo -i
+
+# yum update -y
+
+# yum install httpd -y
+
+# systemctl start httpd
+
+# systemctl enable httpd
+
+
+# netstat -tulpn | grep 80
+
+tcp6       0      0 :::80                   :::*                    LISTEN      3563/httpd          
+udp6       0      0 fe80::825:8fff:fe0d:546 :::*                                3020/dhclient
+
+# curl localhost:80
+
+it will display the index.html pagerat
+
+
+
+
+
+
+
+
+
+Now access web server throuh your browser
+
+https://public ip of ec2 instance
+  ||
+it give timedout error
+  ||
+go to security group ==> select instance security group
+  ||
+edit inbound rule
+  ||
+add rule
+  ||
+type    protocaol    portrange    source      description 
+
+http      tcp           80        0.0.0.0/0    pache web server
+
+now access from browser
+
+http:// public ip of ec2 instance
+
+Hello from mail.saiva.com 
+
+edit cutsom index page for webserver
+
+# echo "Hello from saiva" > /var/www/html/index.html
+
+# echo "Hello from $(hostname -f)" > /var/www/html/index.html
+
+
+Ec2 user data
+=============
+
+click launch instance
+     ||
+select free tier amazon linux 2
+     ||
+selct t2micro free tier eligible
+     ||
+click netx configuration
+     ||
+and last advanced details
+     ||
+ user data [.] As text 
+    
+
+     #!/bin/bash
+     sudo su 
+     yum update -y
+     yum install httpd -y
+     systemctl start httpd
+     systemctl enable httpd
+     hostnamectl set-hostname mail.saiva.com
+     echo "Hello from mail.saiva.com" > /var/www/html/index.html
+     ||
+   click add storage
+     ||
+   click add tag
+     ||
+   configure security group
+     ||
+   select existing security group
+     ||
+   review and launch
+     ||
+   select existing key pair
+     ||
+   click acknowlege
+     ||
+  copy instance public ip
+     ||
+  check every thing installed as user data script
+   
+
+ 
+
+
+  
+
+
+
+  
+
+
+
+
+  
+    
+
+
+
+
+
+
+
+    
+ 
+
+
+
+   
+
+
+  
+
+     
+    
+     
+      
+     
+        
+   
+   
  
 
 

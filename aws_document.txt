@@ -156,8 +156,211 @@ MFA
 . aws comes with predefined managed policies
 
 
+what is Ec2
+===========
+
+. Ec2 Most popular aws offering
+
+mainly consist of
+  . rental virtual machines (Ec2)
+  . storing data on virtual drives(EBS)
+  . Disribting load across machines(ELB)
+  . scaling serivices using auto scaling groups (ASG)
+
+Knowing Ec2 is fundamentals how cloud works
+
+Elastic Block Store (Amazon EBS)
+================================
+Amazon Elastic Block Store (Amazon EBS) provides block level storage volumes for use with EC2 instances. EBS volumes behave like raw, unformatted block devices. ... EBS volumes are highly available and reliable storage volumes that can be attached to any running instance that is in the same Availability Zone.  
 
 
+Elastic Load Balancing(ELB)
+==========================
+Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It can handle the varying load of your application traffic in a single Availability Zone or across multiple Availability Zones.
+
+
+AWS Auto Scaling(ASG)
+=====================
+AWS Auto Scaling is a service that automatically monitors and adjusts compute resources to maintain performance for applications hosted in the Amazon Web Services (AWS) public cloud. ... As demand spikes, the AWS Auto Scaling service can automatically scale those resources, and, as demand drops, scale them back down.
+
+
+
+
+
+Amazon Machine Image(AMI)
+====================
+Description
+An Amazon Machine Image is a special type of virtual appliance that is used to create a virtual machine within the Amazon Elastic Compute Cloud. It serves as the basic unit of deployment for services delivered using EC2
+
+
+
+security groups
+===============
+2. security groups act as a firewall on Ec2 instances
+1. They regulates
+   . Access ports
+   . Authorized ip ranges
+   . control of inbound network (from thers to instance)
+   . control of outbound network (from instance to others)
+
+
+Security group diagram:
+=====================
+
+Ec2 instance ====> security group1
+                      . inbound rule    <=============                   port 22 allowed to my computer
+                                                                         port 22 not allowed to other computer
+
+ec2 instance ===> security group2
+                      . outbound rule  =================>                Any port Any ip allowed
+
+
+
+security group can be attached multible instances
+
+Locked diown to region/vpc combination
+
+it good to mainatain one security group for ssh
+
+if your security group not accessible timed out it's security group issue.
+
+connection refuse error it's application error
+
+All inbound rules blocked by default
+
+All outbound rules authorized by default 
+
+
+
+
+Private network
+==============
+private IP
+
+In IP networking, a private network is a network that uses private IP address space. Both the IPv4 and the IPv6 specifications define private IP address ranges. These addresses are commonly used for local area networks in residential, office, and enterprise environments
+
+
+A public IP address is an IP address that can be accessed over the Internet. ... Your public IP address can be found at What is my IP Address page. Private IP address, on the other hand, is used to assign computers within your private space without letting them directly expose to the Internet
+
+Networking has two sort of ips piv4 and ipv6
+
+
+public ip ==> we can access web directly
+=========
+ . public ip means machine can be identified on the internet
+ . must be unique across whole web
+ . can geo located easily
+
+prvate ip ==> we access web via internet gateway
+========
+  . private ip means machine can be identified by private network only
+  . ip must be unique across private network
+  . machine connect to www throuh internet gateway
+
+Elastic ips
+===========
+
+when you start and stop ec2 instance , it can change it's public ip.
+
+if you need to have fixed public ip for your instance you need elastic ip
+
+basically you can attache one instance at a time
+
+you have  only 5 elastic ips in your account (you can ask aws to increase elastic ip)
+
+overall try to avoid using elastic ip
+
+
+Ec2 user data
+=============
+
+it's possible to bootstrap our instance using ec2 user datascript
+
+bootsrapping means launching commands when machine starts
+
+script only run once at instance first start
+
+Ec2 user data used to auotmate boot task
+  installing update
+  installing software
+any command you install will need sudo rights
+
+
+
+Ec2 instant launch types
+========================
+
+On-demand instance == short work load predictable pricing
+
+resvered instance == long work loads (>= 1 year)
+
+convertable reserved instance == long work loads and flexible instances
+
+schedule reserved instance == 	launch within time
+
+spot instances == short work loads cheap price, can lose instance
+
+Dedicated instances == no other customer will share your hardware
+
+Dedicated hosts == book entire 	physical server, control instance placement
+
+
+
+Ec2-on-demand
+============
+
+pay what you use ( billing per second after one minute)
+
+Has highest cost but no upfront payment
+
+no long term commitment
+
+Recommended short-term and uninterupted work loads you can't predict how application behave
+
+Ec2- reserved instances
+=======================
+
+up to 75% discount compared to on-demand
+
+pay upfront for long term commitment
+
+Reservation period can 1 to 3 years
+
+reerve spcific instance type ex: c4 xlarge
+
+Ec2-spot instance
+=================
+
+upto 90 % discound compered to on demand
+
+bid price get instance 	as log as under price
+
+if others bid high price than you, your instance lost quickly, you will get  two minute warning notification
+
+not greate for critical job or database
+
+
+Ec2-dedicated 
+=============
+physical dedicated instance for your use
+
+full contarol for your instance no share
+
+up to 3 years 
+
+
+
+
+
+
+
+
+
+
+
+
+             
+    
 
 
 
