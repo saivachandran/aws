@@ -349,6 +349,153 @@ full contarol for your instance no share
 up to 3 years 
 
 
+vpc virtual private cloud
+=========================
+
+ 
+A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud. You can launch your AWS resources, such as Amazon EC2 instances, into your VPC.
+
+
+Why VPC is used?
+===============
+Why should I use Amazon VPC? Amazon VPC enables you to build a virtual network in the AWS cloud - no VPNs, hardware, or physical datacenters required. You can define your own network space, and control how your network and the Amazon EC2 resources inside your network are exposed to the Internet.
+
+what is subnet
+==============
+
+A subnet is a logical partition of an IP network into multiple, smaller network segments. It is typically used to subdivide large networks into smaller, more efficient subnetworks. ... Each subnet allows its connected devices to communicate with each other, and routers are used to communicate between subnets.
+
+what is route table
+===================
+
+A route table contains a set of rules, called routes, that are used to determine where network traffic from your subnet or gateway is directed.
+
+
+Internet gateway
+================
+
+An Internet gateway is a network "node" that connects two different networks that use different protocols (rules) for communicating. ... If you have a Wi-Fi connection at home, your Internet gateway is the modem or modem/router combination that your ISP provides so that you connect to the Internet through their network
+
+
+NAT Gateway
+===========
+
+NAT gateways. You can use a network address translation (NAT) gateway to enable instances in a private subnet to connect to the internet or other AWS services, but prevent the internet from initiating a connection with those instances.
+
+
+
+Route53 in aws
+=============
+
+Amazon Route 53 is a scalable and highly available Domain Name System service. Released on December 5, 2010, it is part of Amazon.com's cloud computing platform, Amazon Web Services. The name is a reference to TCP or UDP port 53, where DNS server requests are addressed
+
+What is the use of Route 53?
+============================
+
+Amazon Route 53 is a highly available and scalable cloud Domain Name System (DNS) web service. It is designed to give developers and businesses an extremely reliable and cost effective way to route end users to Internet applications by translating names like www.example.com into the numeric IP addresses like 192.0.
+
+
+. Route53 is managed DNS
+
+. DNS is collection rules and records whick helps client understand how to reach server throuh url
+
+AWS most common records
+======================
+
+A record:  Urls to ip's  ipv4
+
+AAA record for ipv6
+
+CNAME url to url
+
+ALIAS url to aws resources
+
+Route53 have advances feature
+============================
+. Load balancing (through dns also called client load balancing)
+. Health checks  (althouh limited)
+. Routing policy simple failover geolocation geoproximity  
+
+. prefer alias over cname
+
+
+load balancer
+============
+
+Load balancer are servers that forward internet traffic to multiple servers (Ec2 instances)
+
+how load balancer works
+======================
+
+. user connect load balancer and load balancer forward request to backend server.
+. instance give response to load balancer and load balancer give response to user
+
+why we use load balancer
+========================
+
+. spread the load to multiple instances
+. expose sing point access(DNS) to your application
+. it handles instance failures
+. do regular health checks
+. provide the ssl termination for your websites
+. seperate public traffic from private traffic
+
+. ELB ec2 loadbalancer (managed load balancer)
+. aws take care upgrade maintenance and high availability
+
+
+Types of load balancer 
+=====================
+. classic load balancer old (v1 2009)
+. Application load balancer(v2 2016)
+. Network load balancer(v2 2017) 
+
+Health checks
+=============
+. health checks important for loadbalancer
+. loadbalancer forward traffic to available instances
+. response not 200 ok then instance is unhealthy
+
+
+Application load balancer
+========================
+. layer 7 
+. load balancing into multiple httpd applications across machines
+. loadbalancing based in route in url
+. loadbalancing based on hostname in url
+. AlB support http and https websockets protocol
+. applicatin server don't see client ip directly
+. true ip inserted into header x forwarded
+. port mapping feature load balancer can redirect any dynamic port
+
+
+Network loadbalancer  layer4
+===========================
+. forward tcp traffic to network load balancer
+.  handles millions of request per second
+. support for static ip or elastic ip 
+. network load balancer choose for extreme load balancer
+
+
+Auto Scaling group
+==================
+
+An Auto Scaling group contains a collection of Amazon EC2 instances that are treated as a logical grouping for the purposes of automatic scaling and management. An Auto Scaling group also enables you to use Amazon EC2 Auto Scaling features such as health check replacements and scaling policies.
+
+
+Why do we use auto scaling?
+==========================
+Amazon EC2 Auto Scaling helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application. ... If you specify scaling policies, then Amazon EC2 Auto Scaling can launch or terminate instances as demand on your application increases or decreases.
+
+How Auto scaling groups works
+=============================
+
+
+
+
+
+
+
 
 
 
