@@ -381,44 +381,7 @@ NAT Gateway
 ===========
 
 NAT gateways. You can use a network address translation (NAT) gateway to enable instances in a private subnet to connect to the internet or other AWS services, but prevent the internet from initiating a connection with those instances.
-
-
-
-Route53 in aws
-=============
-
-Amazon Route 53 is a scalable and highly available Domain Name System service. Released on December 5, 2010, it is part of Amazon.com's cloud computing platform, Amazon Web Services. The name is a reference to TCP or UDP port 53, where DNS server requests are addressed
-
-What is the use of Route 53?
-============================
-
-Amazon Route 53 is a highly available and scalable cloud Domain Name System (DNS) web service. It is designed to give developers and businesses an extremely reliable and cost effective way to route end users to Internet applications by translating names like www.example.com into the numeric IP addresses like 192.0.
-
-
-. Route53 is managed DNS
-
-. DNS is collection rules and records whick helps client understand how to reach server throuh url
-
-AWS most common records
-======================
-
-A record:  Urls to ip's  ipv4
-
-AAA record for ipv6
-
-CNAME url to url
-
-ALIAS url to aws resources
-
-Route53 have advances feature
-============================
-. Load balancing (through dns also called client load balancing)
-. Health checks  (althouh limited)
-. Routing policy simple failover geolocation geoproximity  
-
-. prefer alias over cname
-
-
+================================================================================================================================
 load balancer
 ============
 
@@ -429,6 +392,8 @@ how load balancer works
 
 . user connect load balancer and load balancer forward request to backend server.
 . instance give response to load balancer and load balancer give response to user
+
+ 
 
 why we use load balancer
 ========================
@@ -442,6 +407,9 @@ why we use load balancer
 
 . ELB ec2 loadbalancer (managed load balancer)
 . aws take care upgrade maintenance and high availability
+
+
+
 
 
 Types of load balancer 
@@ -490,7 +458,143 @@ Amazon EC2 Auto Scaling helps you ensure that you have the correct number of Ama
 How Auto scaling groups works
 =============================
 
+If any instance becomes unhealthy, the auto-scaling group terminates the unhealthy instance and launches another instance to replace it. Using scaling policies you can increase or decrease the number of running EC2 instances in the group automatically to meet the changing conditions.
 
+=========================================================================
+
+Amazon Elastic Block Store EBS(10.05.2020)
+==========================================
+
+Amazon Elastic Block Store EBS is a block storage system used to store persistent data. Amazon EBS is suitable for EC2 instances by providing highly available block level storage volumes. It has three types of volume, i.e. General Purpose (SSD), Provisioned IOPS (SSD), and Magnetic.
+
+Kindle. RSS. An Amazon EBS volume is a durable, block-level storage device that you can attach to one instance or to multiple instances at the same time. You can use EBS volumes as primary storage for data that requires frequent updates, such as the system drive for an instance or storage for a database application.
+
+. EBS volume is network drive we can attach drive while instance run
+. it's network drive (not a phtsical drive)
+. EBS volume locked by availability zone (we canit attache another avilabilty zone ebs volume)
+. you can increase the size of the EBS volume 
+
+EBS volume types
+===============
+
+. GP2 Genwral Purpose SSD volume that balanced price perpormance for wide work loads
+.  IO1 SSD Highest perpormance ssd for mission critical low performance and work loads
+.  SD1 	(HDD) low cost HDD volume desined frequently accessed intensive work loads
+.  SCI lowest cost HDD less frequently accessed HDD
+.  EBS volume characterized by size/throuhput/IOPS
+
+
+EBS snapshot
+===========
+. EBS volume can backed up using snapshot
+. snapshot only take actual space of EBS volume
+. only used data only stored in snapshot
+
+
+Instance store
+==============
+
+. instance store not come with root ebs volume
+. they come with instance stor
+. instnce store physical ayyached with store
+. can't resize 
+. on termination instance store will lost
+. backup must be operated by user
+
+=================================================================
+
+
+Route53 in aws(10.05.2020)
+==========================
+
+Amazon Route 53 is a scalable and highly available Domain Name System service. Released on December 5, 2010, it is part of Amazon.com's cloud computing platform, Amazon Web Services. The name is a reference to TCP or UDP port 53, where DNS server requests are addressed
+
+What is the use of Route 53?
+============================
+
+Amazon Route 53 is a highly available and scalable cloud Domain Name System (DNS) web service. It is designed to give developers and businesses an extremely reliable and cost effective way to route end users to Internet applications by translating names like www.example.com into the numeric IP addresses like 192.0.
+
+
+. Route53 is managed DNS
+
+. DNS is collection rules and records whick helps client understand how to reach server throuh url
+
+AWS most common records
+======================
+
+A record:  Urls to ip's  ipv4
+
+AAA record for ipv6
+
+CNAME url to url
+
+ALIAS url to aws resources
+
+Route53 have advances feature
+============================
+. Load balancing (through dns also called client load balancing)
+. Health checks  (althouh limited)
+. Routing policy simple failover geolocation geoproximity  
+
+. prefer alias over cname
+
+
+
+A Records
+=========
+A Records. DNS records are used to control the location of a resource on the Internet. As an example, an A Record is used to point a logical domain name, such as "google.com", to the IP address of Google's hosting server, "74.125. ... They also point localhost.example.com to the server that the domain is hosted on.
+
+
+CNAME
+=====
+A CNAME, or Canonical Name record, is a record that points to another domain address rather than an IP address. For example, say you have several subdomains, like www.mydomain.com, ftp.mydomain.com, mail.mydomain.com etc and you want these sub domains to point to your main domain name mydomain.com.
+
+ALIAS record
+============
+An ALIAS record is a virtual host record type which is used to point one domain name to another one, almost the same as a CNAME. The important difference is that ALIAS can coexist with other records on that name.
+
+
+Amazon Route 53 alias records provide a Route 53–specific extension to DNS functionality. Alias records let you route traffic to selected AWS resources, such as CloudFront distributions and Amazon S3 buckets. They also let you route traffic from one record in a hosted zone to another record.
+
+
+RDS(Relational database service)15.05.2020
+==========================================
+
+. RDS it's managed DB service
+. it allow to crete databases in cloud and managed by aws
+. Database list
+    . postgres
+    . oracle
+    . mysql, mariadb
+    . Microsoft sql server
+    . Aurora (Aws propertery service) 	
+
+Advantages on RDS db on EC2 
+---------------------------
+. managed service
+. Os patching level
+. continuous backup and restore in specific timestamp
+. monitoring dashboards
+. Multi availability zone for disaster avaiability
+. Maintenance window for upgrades
+. scaling windows
+
+
+disadvantages
+-------------
+. we can't ssh into rds instance
+
+read replica for scalability
+---------------------------
+. up to 5 read replicas
+. within az or cross az
+
+RDS security
+-----------
+. RDS database deployed within private subnet
+. not in a public
+. Rds database works levearge security groups like ec2 instance
+. IAM policy help wo can manage RDS	
 
 
 

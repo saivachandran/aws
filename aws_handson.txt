@@ -901,7 +901,7 @@ Create Auto Scaling Group
          ||
      click Auto Scaling Groups
          ||
-    click asg and edit instance it shows ealthy status
+    click asg and edit instance it shows healthy status
          ||
     check target groups and instances
           ||
@@ -911,6 +911,292 @@ Create Auto Scaling Group
 
 . edit autoscaling group edit desired capacity change 1 to 2 and save
 . it will launch two instances
+
+================================================================================
+
+Amazon Elastic Block Store EBS(10.05.2020)
+==========================================
+
+attach one instance volume another instance root volume
+
+click snapshot
+    ||
+ select Resource Type
+    . [.] volume
+    . instance
+    ||
+  volume [select instance id to snapshot]
+    ||
+ Description [EBS-Snapshot]
+    || 
+ Add tag
+   . Name  [saiva-snap]
+    ||
+ Create snapshot
+--------------------------------------------
+    
+
+   select snap
+      ||
+   create volume
+      || 
+ 
+  Snapshot ID []
+    ||
+ Volume Type  General Purpose SSD (gp2)
+    ||
+ 
+  Size (GiB)   8
+    ||
+
+ Availability Zone* ap-south-1a 
+    ||
+ 
+Fast Snapshot Restore    Not enabled
+Throughput (MB/s)      Not applicable
+Encryption           [untick] Encrypt this volume
+ 
+   ||
+Add tag
+  Name    sai
+   ||
+Craete voume
+
+-------------------------------------
+
+Select created volume
+    ||
+Attach to runnig instance
+    ||
+ volume [volume]
+ instance [attaching instance]
+ device [/dev/xvda]
+    ||
+it gives error device in use 
+   
+----------------------------------
+
+  stop instance
+     ||
+  detach old volume
+     ||
+  Now attach volume with instance
+     ||
+     
+ volume [volume]
+ instance [attaching instance]
+ device [/dev/xvda]
+     ||
+  Attach 
+------------------------------------------------------------
+
+increase root volume
+
+by safer side take snapshot and increse root volume
+
+  select volume
+     ||
+  modify volume
+     ||
+  increase size 
+     ||
+ click modify
+
+
+resize partions
+
+
+login instance
+
+# file -s /dev/xvda
+
+configure partition
+
+# growpart /dev/xvda 1
+# growpart /dev/xvda 2
+
+reboot and check
+
+-----------------------------------------------------------
+
+Route53(11.05.2020)
+===================
+
+click Route53 service
+   . DNS management
+   . Traffic Management
+   . Availability onitoring
+   . Domain Registration
+   ||
+ select DNS Management
+   ||
+ click Create Hosted Zone
+    . Domain Name [kavi.gq]
+    . Comment [mydomain]
+    . Type [Public Hoted Doamin]
+    
+    . click create
+    ||
+ Bydefault name server and soa records created
+    ||
+ Create Record Set
+    . Name []kavi.gq.
+    . Type [A-ipv4 Address]
+    . Alias []yes [] No
+    ||
+  TTL seconds [60] 1m 5m 1h id 
+    ||
+  value [ip.xxxx]
+    ||
+ create
+
+
+go to domain panel create a record aws resource
+
+====================================================================================================
+
+RDS(Relational Database service) 15.05.2020
+===========================================
+. serch RDS service
+     ||
+. click launch Database instance
+     ||
+. Select Engine
+    . Engine Options
+    . select mysql (free tier eligibe)
+    ||
+. Specify DB details
+     . instance specifications
+     . DB engine
+    ||
+. Licence model 
+   [general-public-licence]
+    ||
+. DB engine version
+   [MySql 5.7.22]
+    ||
+. DB instance class
+   db.t2.micro
+  ||
+. mult- AZ deployment
+   ||
+. storage Type
+   [Genaral purpose ssd]
+   ||
+. Allooted storage
+   20   GiB
+   ||
+ settings
+   . DB instance identifier
+       [saiva]
+   . master username
+       [saiva]
+   . master password
+       [Saiva1234]
+   . confirm pssword
+       [Saiva1234]
+  ||
+. configure advance settings
+    . Network&Security
+    . Virtual Private cloud 
+       [selct vpc]
+    . select subnet group
+       [subnet group]
+    . Public accessbility
+        [] yes
+        [] NO  production database select no
+    . Availabilty zone
+       [No preference]
+
+    . vpc security group
+       . create new security group
+    . Database options
+        . Database name
+            [saiva]
+    . port
+       [3306]
+    . DB parameter group
+       . default.mysql5.7
+    . option group
+       . default.mysql5.7
+    . IAM DB authendication
+       . [] Enable IAM DB authendication
+       . [] disable
+    . Encryption
+       [] encryption
+       [] disable encryption
+    . Backup
+       . backup retention period 
+           [7 days] upto 35 days
+   . backup window
+     [] select window 
+     [] No prefernce
+   . [.] copy tag to snapshots
+
+   . Monitoring
+      . [] enhanced monitoring
+      . [.] disable monitoring
+   . Log exports
+      . [] Audit log
+      . [] Error Log
+      . [] General Log
+      . [] Slow query Log
+
+   . maintanance window
+      . [.] Enable auto minor version upgrade
+      . [] disable auto minor version upgrade
+
+   . Maintance window
+      . [] select window
+      . [.] No preference
+
+      ||
+  . click create database
+  . VIew DB instance Details
+  
+
+Rds connect block
+----------------
+
+copy user end point
+
+# mysql -h userend point -u saiva -p
+
+
+
+
+
+
+    
+ 
+
+
+    
+
+ 
+     
+  
+ 
+
+   
+    
+
+
+
+  
+
+ 
+
+   
+ 
+
+  
+
+
+ 
+
+
+
 
 
        
