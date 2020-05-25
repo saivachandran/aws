@@ -594,16 +594,157 @@ RDS security
 . RDS database deployed within private subnet
 . not in a public
 . Rds database works levearge security groups like ec2 instance
-. IAM policy help wo can manage RDS	
+. IAM policy help wo can manage RDS
+
+
+
+Elastic cache overview(16.05.2020)
+=================================
+
+Amazon ElastiCache is a fully managed in-memory data store and cache service by Amazon Web Services (AWS). The service improves the performance of web applications by retrieving information from managed in-memory caches, instead of relying entirely on slower disk-based databases.
+
+
+How does AWS ElastiCache work
+Amazon ElastiCache is a web service that makes it easy to deploy and run Memcached or Redis protocol-compliant server nodes in the cloud. ... Using Amazon ElastiCache, you can not only improve load and response times to user actions and queries, but also reduce the cost associated with scaling web applications.
+
+
+What is difference between stateless and stateful protocol
+Stateless Protocol does not require the server to retain the server information or session details. Stateful Protocol require server to save the status and session information. In Stateless Protocol, there is no tight dependency between server and client. ... Stateless Protocols handle the transaction very fastly.
+
+
+. Elastic cache get to Managed redis and memcached
+. caches are inmemory databases and high performance and low latency
+. Help reduce load of worloads for read intensive work loads
+. make your application stateless
+. write scaling using sharding
+. read scaling using read replicas
+. multi az for failover
+
+two methos
+---------
+- redis
+- memcached
+
+redis
+-----
+. redis in-memory key value store
+. cache surive reboot by default
+. low latency
+. stored user sessions
+
+
+memcached
+---------
+. memcahed in-memory object store
+. cache doesn't survive on reboots
+. quick retrival of object from memeory
+
+==================================================================================
+Amazon s3(21.05.1990)
+=====================
+
+Amazon S3 has a simple web services interface that you can use to store and retrieve any amount of data, at any time, from anywhere on the web. It gives any developer access to the same highly scalable, reliable, fast, inexpensive data storage infrastructure that Amazon uses to run its own global network of web sites.
+
+
+How does s3 work internally
+
+S3 involves users creating 'buckets'. These buckets are used to store objects. An object consists of data, key(assigned name) and metadata. When data is added to the bucket, Amazon S3 creates a unique version ID and allocates it to the object.
+
+
+The S3 cloud storage service gives a subscriber access to the same systems that Amazon uses to run its own websites. S3 enables customers to upload, store and download practically any file or object that is up to five terabytes (TB) in size, with the largest single upload capped at five gigabytes (GB).
+
+
+
+Amazon s3 bucket
+----------------
+. Amazon s3 allow people store objects in buckets
+. bucket must have globally unique name
+. buckets are defined at region level
+. nameing convention
+   . no upper case 
+   . no lower case
+   . 3-63 char long
+   . not an ip
+   . must start with lowercase
+
+s3 object
+---------
+. s3 object is (file) have key, key is full path
+. max size i 5TB
+. uplaod more than 5GB use multipart upload
+. Metadata list of key and value pair
+. Tags used for security and life cycle
+. version id is enabled
+
+------------------------------------------------------------------
+
+Aws s3 versioning
+=================
+
+. you can versioning aws s3 files
+. it's enabled bucket level
+. we can protect unintended deleted file
+. easy rollback previous verions
+--------------------------------------------------------
+
+s3 Encryption
+=============
+
+4 types of s3 encryption
+------------------------
+. SSE-S3 Encrypt s3 object using key handled by aws
+. SSE-KMS leverage aws key Managed service and Managed by encryption
+. SSE-C when you want to Manage own encryption key
+. client side encryption
+. xmz-server-side-encryption-AES256
+-----------------------------------------------------------------------------------
+
+S3 security
+-----------
+
+2 types
+-------
+
+1. user based
+
+.IAM  polices - which API calls should allowed for specific user from IAM console
+ 
+2. resource based
+
+. bucket policies bucket wide rues from s3 console - allow cross account
+
+s3 bucket policies
+-----------------
+. json based policies
+   . resource bucket and objects
+   . Actions set of api allow or deny
+   . Effect Allow/Deny
+   . Princple The account user apply to the policy to
+
+use s3 bucket for policy to
+  . grant public access to bucket
+  . force object to be encrypted at upload
+  . grant access to another account
+
+. Networking
+. Logging and Audit
+. user security
+---------------------------------------------
+
+s3 websites
+-----------
+
+. s3 can host static websites and accessible via www
+. if you get 403 forbidden error make sure bucket policy allow public read
+. 
+ 
+   
+ 
 
 
 
 
-
-
-
-
-
+	
 
 
 

@@ -1162,6 +1162,281 @@ copy user end point
 
 # mysql -h userend point -u saiva -p
 
+===================================================================
+
+Elastic cache 16.05.2020
+-----------------------
+
+. aws console type Elastic cache
+. click get started
+. Create your Elastic cache cluster
+      . cluster Engine
+          [.] Redis
+          []  Memcached
+. Redis settings
+    . Name [MyRedis]
+    . Descrption [My first Redis instance]
+    . Engine Version Compatability [5.0]
+    . port [6379]
+    . parameter group [default.redis5.0]
+    . Node type [select t2.micro]
+    . Number of Read replicas [None]
+    
+. Adanced Redis settings
+    .  subnet group [create new]
+    .  Name [my-redis-subnet-group]
+    .  Description [My Redis subnet]
+    .  vpc id [vpc]
+    .  subnets
+       [.]a
+       []b
+       []c
+
+. Prefered Availability zone
+     [.] no prefernce
+     []  select zones
+
+. security
+   security groups [default]
+   Encryption rest []
+   Encryption transist []
+
+. import cluster
+
+. backup
+
+. Maintenance window
+
+. Topic sns notification [disable]
+
+. click create
+
+. copy user end point link and allow port in firewall
+
+. access via ec2 instance
+
+telnet endpoint id 6379
+============================================================================
+s3 bucket and objects
+=====================
+. click amazon s3
+.s3 does'nt require region selection
+. click create bucket
+. name and bucket name
+    . bucket name 
+        [sai121]
+    . Region
+        [ab-south-1a]
+    . copy setting from existing bucket
+
+. click next
+. click next
+. click create bucket
+
+
+two ways wa can open s3 files
+
+. right click and open
+. using url we can open
+================================================================
+
+Aws s3 versioning
+-----------------
+
+. click s3 bucket
+. select properties
+. select verioning
+. enable versioning
+
+
+. select upload multiple files
+. click show and hide option in s3 bucket
+. if you delete file it will avilable another versioning file 
+
+--------------------------------------------------------------------
+
+aws s3 Encryption
+-----------------
+
+two ways we can enable versioning in s3 bucket
+
+. select s3 bucket
+. click upload
+. click next
+. select which encryption you want
+    . None
+    . Amazon s3 matser-key
+    . Aws kms master-key
+. upload file
+. now check encryption
+
+
+second method
+-------------
+. select bucket properties
+. enable versioning by defult
+. upload file as previous method
+. check encryption method
+
+-----------------------------------------------------------
+
+AWS s3 bucket policy for deny without encryption upload
+-------------------------------------------------------
+. select s3 bucket 
+. disable default encryption 
+. click permission
+. click bucket policy
+. click policy generator
+    . Select policy Type
+        . select Type of policy [s3 bucket policy]
+    . Add Statements
+       . effect [] Allow [*] Deny
+    . principle [*]
+    . AWS service [Amazon s3]
+    . Actions [put objects]
+    . Amazon Resource Name(ARN) [arn:aws:s3:::sai121]
+. Add conditions
+   . condition [Null]
+   . key [s3:x-amz-server-side-encryption]
+   . value [true]
+   . click add condtion
+   . Add statements
+
+
+another condtion
+
+
+. Select policy Type
+        . select Type of policy [s3 bucket policy]
+    . Add Statements
+       . effect [] Allow [*] Deny
+    . principle [*]
+    . AWS service [Amazon s3]
+    . Actions [put objects]
+    . Amazon Resource Name(ARN) [arn:aws:s3:::sai121]
+. Add conditions
+   . condition [Stringnotequals]
+   . key [s3:x-amz-server-side-encryption]
+   . value [AES256]
+   . click add condtion
+   . Add statements
+
+
+. click plicy generator
+. copy that policy
+. past into bucket policy
+. save bucket policy
+
+
+. upload file without encryption status [error]
+. upload file with encryption status [success]
+
+---------------------------------------------------------------------------------------------
+s3 websites
+-----------
+
+. Delete previous s3 policies 
+
+. click properties 
+. enable static website hosting
+. put index.html file and save it
+. click permission
+. click block public access
+. untik public accsss (by default it's blocked)
+. save 
+
+
+click bucket policy
+-------------------
+
+. Select policy Type
+        . select Type of policy [s3 bucket policy]
+    . Add Statements
+       . effect [*] Allow [] Deny
+    . principle [*]
+    . AWS service [Amazon s3]
+    . Actions [get objects]
+    . Amazon Resource Name(ARN) [arn:aws:s3:::sai121]
+    . Add statements
+    . Generate policy
+    . copy and paste into bicket policy
+-----------------------------------------------------------------------
+aws s3 IAM role
+---------------
+
+. create iam role with s3 full access
+
+. launch ec2 instance with iam role
+
+. after instance launch access s3 bucket
+
+
+# aws s3 ls
+
+# aws s3 mb s3://sai1
+
+# aws s3 rb s3://sai1
+------------------------------------------------------------------------
+mount s3 bucket into ec2 instance
+
+. upload index.html file into s3bucket
+
+. create user with s3 full access
+
+. download .csv file
+
+# yum update -y
+
+# sudo yum install automake fuse fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
+
+# git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+
+# cd s3fs-fuse
+
+# ./autogen.sh
+
+# ./configure --prefix=/usr --with-openssl
+
+# make
+
+# make install
+
+# touch /etc/passwd-s3fs
+
+# vim /etc/passwd-s3fs
+Your_accesskey:Your_secretkey
+
+# sudo chmod 640 /etc/passwd-s3fs
+
+# mkdir /mys3bucket
+
+# s3fs your_bucketname -o use_cache=/tmp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 /mys3bucket
+
+
+
+
+   
+
+
+
+
+
+
+ 	
+
+
+
+
+
+   
+
+
+
+ 
+
+      
+   
+
 
 
 
