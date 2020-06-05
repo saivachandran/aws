@@ -736,7 +736,39 @@ s3 websites
 
 . s3 can host static websites and accessible via www
 . if you get 403 forbidden error make sure bucket policy allow public read
-. 
+
+-----------------------------------------------------------------------------------------
+
+aws cli
+=======
+
+AWS CLI is a tool that pulls all the AWS services together in one central console, giving you easy control of multiple AWS services with a single tool. The acronym stands for Amazon Web Services Command Line Interface because, as its name suggests, users operate it from the command line.
+
+The AWS Command Line Interface (CLI) is for managing your AWS services from a terminal session on your own client, allowing you to control and configure multiple AWS services. ... With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
+---------------------------------------------------------------------------------
+
+what is elastic beanstalk
+
+Elastic Beanstalk, you can quickly deploy and manage applications in the AWS Cloud without having to learn about the infrastructure that runs those applications. Elastic Beanstalk reduces management complexity without restricting choice or control. You simply upload your application, and Elastic Beanstalk automatically handles the details of capacity provisioning, load balancing, scaling, and application health monitoring.
+
+Elastic Beanstalk supports applications developed in Go, Java, .NET, Node.js, PHP, Python, and Ruby. When you deploy your application, Elastic Beanstalk builds the selected supported platform version and provisions one or more AWS resources, such as Amazon EC2 instances, to run your application
+
+
+What is Elastic Beanstalk used for
+
+Elastic Beanstalk employs Auto Scaling and Elastic Load Balancing to scale and balance workloads. It provides tools in the form of Amazon CloudWatch to monitor the health of deployed applications. It also provides capacity provisioning due to its reliance on AWS S3 and EC2
+
+
+
+Advantages. Elastic Beanstalk's main benefits include timesaving server configuration, powerful customization, and a cost-effective price point. Elastic Beanstalk automates the setup, configuration, and provisioning of other AWS services like EC2, RDS, and Elastic Load Balancing to create a web service
+
+
+Drawbacks. Some of the biggest pains with Elastic Beanstalk include unreliable deployments, lack of transparency and documentation around stack and application upgrades, and an overall lack of clear documentation
+
+
+	
+
+
  
    
  

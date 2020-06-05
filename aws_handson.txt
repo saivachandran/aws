@@ -1412,6 +1412,392 @@ Your_accesskey:Your_secretkey
 
 # s3fs your_bucketname -o use_cache=/tmp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 /mys3bucket
 
+--------------------------------------------------------------------------------------------------------------------
+
+install aws cli (26.05.2020)
+============================
+
+ install pip3 and python
+-------------------------
+. apt update -y
+. apt install python3-pip
+. pip3 --version
+
+install aws cli
+---------------
+# pip3 install --upgrade --user awscli
+# ls -a ~
+# vim ~/.bashrc
+
+. at end of the line add below command
+
+export PATH=$HOME/.local/bin:$PATH
+
+# source ~/.bashrc
+
+# aws --version
+
+uninstall aws cli
+-----------------
+
+# pip3 uninstall awscli
+
+---------------------------------------------------------------
+
+aws cli cnfiguration
+--------------------
+
+# aws configure
+
+ Aws Access Key Id :
+ Aws Secret Access Key Id:
+ Default Region Name:
+ Default output format: 
+
+# ls ~/.aws
+
+# cat ~/.aws/config
+
+# cat ~/.aws/credentials
+----------------------------------------------------------------
+
+aws cli practice with s3
+-------------------------
+
+create bucket
+
+# aws s3 mb s3://bucket-name
+
+list all s3 buckets
+
+# aws s3 ls
+
+list bucket all object
+
+# aws s3 ls s3://bucket-name
+
+list specific file
+
+#  aws s3 ls s3://bucket-name/path/
+
+delete empty bucket bucket
+
+# aws s3 rb s3://bucket-name
+
+delete bucket with files
+
+# aws s3 rb s3://bucket-name --force
+
+copy file from local machine
+
+# aws s3 cp file.txt s3://my-bucket/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=emailaddress=user@example.com
+
+
+sync local file into s3 bucket
+
+# aws s3 sync . s3://sai121
+
+remove single file in s3 bucket
+
+# aws s3 rm s3://sai121/beach.jpg
+
+download file from s3 to loacal
+
+# aws s3 cp s3://sai121/beach.jpg beach.jpg
+
+---------------------------------------------------------------------------------
+
+aws cli on ec2 instance
+
+
+. create role with s3 read only access
+. attach role with ec2 instance
+. access instance with public ip
+
+# aws s3 ls
+
+# aws s3 mb s3://per12
+
+it's throuh access denied error
+
+. attach full access policy with role
+
+now repeat same command now it's works
+
+# aws s3 mb s3://per12
+
+------------------------------------------------------------------------------
+
+create policy
+-------------
+
+. click create policy
+. service choose service
+. select s3 read get object
+. select resource all resources
+. review policy
+
+. Name [mytestpolicy]
+. Description [myown]
+. summary
+. click create policy
+
+
+. click roles
+. selct role
+. attach own policy
+
+
+
+--------------------------------------------------------------------------
+
+aws cli
+=======
+. install aws cli 
+. configure aws cli
+. create iam user and give ec2 full permission to that user
+
+
+# which aws
+
+/home/rits-3/.local/bin/aws
+
+# aws --version
+
+aws-cli/1.18.66 Python/3.6.9 Linux/5.3.0-51-generic botocore/1.16.16
+
+create key pair first
+
+# aws ec2 create-key-pair --key-name iniseri --query 'KeyMaterial' --output text > iniseri.pem
+
+list key pair
+
+# aws cli 
+
+# aws ec2 describe-key-pairs
+
+{
+            "KeyPairId": "key-0649c4b3764d923dc",
+            "KeyFingerprint": "d8:56:4c:5c:d7:c8:ed:0c:5d:24:bc:b1:1a:4e:e2:74:20:54:44:5e",
+            "KeyName": "iniseri",
+            "Tags": []
+        }
+----------------------------------
+
+ list security group
+
+# aws ec2 describe-security-groups
+
+create security group
+
+# aws ec2 create-security-group --group-name kavigroup --description "kavigroup" --vpc-id vpc-1e737676
+
+delete security group
+
+# aws ec2 delete-security-group --group-name kavigroup
+
+list vpc
+
+#  aws ec2 describe-vpcs
+
+
+Allow inbound rule to security group
+
+# aws ec2 authorize-security-group-ingress  --group-id sg-0f464679c34a7a8f2 --protocol tcp --port 22 --cidr 106.198.53.23/32
+
+
+launch instance using aws cli
+
+
+# aws ec2 run-instances --image-id ami-0470e33cd681b2476 --count 1 --instance-type t2.micro --key-name iniseri --security-group-ids sg-0f464679c34a7a8f2 --subnet-id subnet-b46cfcf8
+
+
+access instance using public ip
+
+
+
+aws stop instance using cli
+
+
+# aws ec2 stop-instances --instance-ids i-039b9a3168073c9c8
+
+{
+    "StoppingInstances": [
+        {
+            "CurrentState": {
+                "Code": 64,
+                "Name": "stopping"
+            },
+            "InstanceId": "i-039b9a3168073c9c8",
+            "PreviousState": {
+                "Code": 16,
+                "Name": "running"
+            }
+        }
+    ]
+}
+
+-------------------------------------------------------
+
+aws cli start instance
+
+
+aws ec2 start-instances --instance-ids i-039b9a3168073c9c8
+{
+    "StartingInstances": [
+        {
+            "CurrentState": {
+                "Code": 0,
+                "Name": "pending"
+            },
+            "InstanceId": "i-039b9a3168073c9c8",
+            "PreviousState": {
+                "Code": 80,
+                "Name": "stopped"
+            }
+        }
+    ]
+}
+-------------------------------------------------------
+aws cli terminate instance
+
+
+aws ec2 terminate-instances --instance-ids i-039b9a3168073c9c8
+{
+    "TerminatingInstances": [
+        {
+            "CurrentState": {
+                "Code": 32,
+                "Name": "shutting-down"
+            },
+            "InstanceId": "i-039b9a3168073c9c8",
+            "PreviousState": {
+                "Code": 16,
+                "Name": "running"
+            }
+        }
+    ]
+}
+-------------------------------------------------------
+Elastic beanstalk
+=================
+
+. select elastic beanstalk
+
+Get started in three steps
+
+. select platform
+. uplaod application using sample
+. Run it
+
+
+
+. click create new application
+. Application information
+    . Application name [my-first-web-app]
+
+. Base configuration
+   . platform [node.js]
+. application code
+  . sample application
+  . Application code
+
+. application geting uploaded
+
+. click create application
+
+. once green tick appear access using url
+
+
+. it will create s3 bucket
+
+. check events check lauch events
+
+. it create security group
+. assign elastic ip
+
+. it will create ec2 instance
+. click logs
+. click health check
+. click monitoring to check cpu network
+
+
+-------------------------------------------------------
+
+. click action and create new enviroment
+. select web server enviroment
+   . Enviroment information
+        . Application Name [my-first-web-app]
+        . Enviroment-Name [my-first-web-app-env]
+        . Domain [chck-availability]
+         
+
+. Base configuration
+   . platform [node.js]
+. application code
+  . sample application
+  
+. configure more option
+   . low cost
+   . high avaliability
+   . custom config
+
+. select high availability
+  . software
+  . instances
+  . capacity
+  . load balancer
+  . roling updates and deployments
+  . security
+  
+. create enviroment
+--------------------------------------------------------- 
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+ 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
